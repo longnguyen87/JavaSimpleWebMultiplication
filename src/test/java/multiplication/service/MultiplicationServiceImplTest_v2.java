@@ -35,4 +35,13 @@ public class MultiplicationServiceImplTest_v2 {
 		boolean attemptResult = service.checkAttempt(attempt);
 		assertThat(attemptResult).isTrue();
 	}
+	@Test
+	public void checkWrongAttemptTest() {
+		// Create some stubs, giving wrong value
+		Multiplication mulStub = new Multiplication(50, 60);
+		User user = new User("long");
+		MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, mulStub	, 3010);
+		boolean attemptResult = service.checkAttempt(attempt);
+		assertThat(attemptResult).isFalse();
+	}
 }
