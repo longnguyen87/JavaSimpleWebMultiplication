@@ -14,6 +14,5 @@ public final class User {
 	// Empty constructor for JSON (de)serialization
 	protected User() {
 		alias = null;
-		
 	}
 }

@@ -14,7 +14,7 @@ public final class MultiplicationResultAttempt {
 	private final Multiplication multiplication;
 	private final int resultAttempt;
 	
-	public MultiplicationResultAttempt() {
+	MultiplicationResultAttempt() {
 		// TODO Auto-generated constructor stub
 		user = null;
 		multiplication = null;
