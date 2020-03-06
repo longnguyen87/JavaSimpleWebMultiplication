@@ -16,15 +16,14 @@ import multiplication.domain.User;
 /*
  * This class - as created in chapter 3, will mainly concern with testing the CheckAttempt method
  */
-@RunWith(SpringRunner.class)
+
 public class MultiplicationServiceImplTest_v2 {
-	@MockBean
-	private RandomGeneratorService generatorService;
+	
 	private MultiplicationService service;
 	
 	@Before
 	public void init() {
-		service = new MultiplicationServiceImpl(generatorService);
+		service = new MultiplicationServiceImpl(new RandomGeneratorServiceImpl());
 	}
 	@Test
 	public void checkCorrectAttemptTest() {
