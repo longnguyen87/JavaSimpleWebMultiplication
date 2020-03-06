@@ -24,8 +24,10 @@ public class MultiplicationServiceImpl implements MultiplicationService	{
 
 	@Override
 	public boolean checkAttempt(MultiplicationResultAttempt resultAttempt) {
-
-		return false;
+		Multiplication mul = resultAttempt.getMultiplication(); 
+		int correctResult = mul.getFactor1() * mul.getFactor2();
+				
+		return correctResult == resultAttempt.getResultAttempt();
 	}
 	
 
