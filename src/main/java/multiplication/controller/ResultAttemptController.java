@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import multiplication.domain.MultiplicationResultAttempt;
 import multiplication.service.MultiplicationService;
 
@@ -28,14 +25,10 @@ public final class ResultAttemptController {
 	}
 
 	@PostMapping
-	ResponseEntity<ResultResponse> postResult(@RequestBody MultiplicationResultAttempt attempt) {
-		return ResponseEntity.ok(new ResultResponse(service.checkAttempt(attempt)));
+	ResponseEntity<MultiplicationResultAttempt> postResult(@RequestBody MultiplicationResultAttempt attempt) {
+		boolean isCorrect = service.checkAttempt(attempt);
+		return ResponseEntity.ok(new MultiplicationResultAttempt(attempt.getUser(), attempt.getMultiplication(),
+				attempt.getResultAttempt(), isCorrect));
 	}
 
-	@RequiredArgsConstructor
-	@NoArgsConstructor(force = true)
-	@Getter
-	static final class ResultResponse {
-		private final boolean correct;
-	}
 }

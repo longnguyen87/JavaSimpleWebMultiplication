@@ -20,7 +20,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import multiplication.controller.ResultAttemptController.ResultResponse;
 import multiplication.domain.Multiplication;
 import multiplication.domain.MultiplicationResultAttempt;
 import multiplication.domain.User;
@@ -36,7 +35,6 @@ public class CheckResultControllerTest {
 	private MockMvc mvc;
 
 	private JacksonTester<MultiplicationResultAttempt> jsonResult;
-	private JacksonTester<ResultResponse> jsonResponse;
 
 	@Before
 	public void setup() {
@@ -53,13 +51,13 @@ public class CheckResultControllerTest {
 		genericParameterizedTest(false);
 	}
 
-	private void genericParameterizedTest(boolean b) throws Exception {
+	private void genericParameterizedTest(final boolean b) throws Exception {
 		// Step 1: Stub
 		given(service.checkAttempt(any(MultiplicationResultAttempt.class))).willReturn(b);
 
 		User user = new User("Long");
 		Multiplication mul = new Multiplication(50, 70);
-		MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, mul, 3500);
+		MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, mul, 3500, b);
 		// when
 		MockHttpServletResponse response = mvc.perform(
 				post("/results").contentType(MediaType.APPLICATION_JSON).content(jsonResult.write(attempt).getJson()))
@@ -67,7 +65,8 @@ public class CheckResultControllerTest {
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-		assertThat(response.getContentAsString()).isEqualTo(jsonResponse.write(new ResultResponse(b)).getJson());
+		assertThat(response.getContentAsString())
+				.isEqualTo(jsonResult.write(new MultiplicationResultAttempt(user, mul, 3500, b)).getJson());
 	}
 
 }
