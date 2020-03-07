@@ -11,22 +11,22 @@ import multiplication.service.MultiplicationService;
 
 @RestController
 @RequestMapping("/results")
-public final class CheckResultController {
-	// Need to implement logic for user to check result of multiplication.
+public final class ResultAttemptController {
+	/*
+	 * This class will receive user response
+	 */
 	private final MultiplicationService service;
-	
+
 	@Autowired
-	public CheckResultController(MultiplicationService service) {
+	ResultAttemptController(MultiplicationService service) {
 		super();
 		this.service = service;
 	}
-	
-	@RequiredArgsConstructor
-    @NoArgsConstructor(force = true)
-    @Getter
-    static final class ResultResponse {
-        private final boolean correct;
-    }
-	
 
+	@RequiredArgsConstructor
+	@NoArgsConstructor(force = true)
+	@Getter
+	static final class ResultResponse {
+		private final boolean correct;
+	}
 }
