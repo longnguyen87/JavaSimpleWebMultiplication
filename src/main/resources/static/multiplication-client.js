@@ -6,8 +6,8 @@ function updateMultiplication() {
         $("#attempt-form").find( "input[name='result-attempt']" ).val("");
         $("#attempt-form").find( "input[name='user-alias']" ).val("");
         // Gets a random challenge from API and loads the data in the HTML
-        $('.multiplication-a').empty().append(data.factorA);
-        $('.multiplication-b').empty().append(data.factorB);
+        $('.multiplication-a').empty().append(data.factor1);
+        $('.multiplication-b').empty().append(data.factor2);
     });
 }
 
@@ -28,7 +28,7 @@ $(document).ready(function() {
             userAlias = $form.find( "input[name='user-alias']" ).val();
 
         // Compose the data in the format that the API is expecting
-        var data = { user: { alias: userAlias}, multiplication: {factorA: a, factorB: b}, resultAttempt: attempt};
+        var data = { user: { alias: userAlias}, multiplication: {factor1: a, factor2: b}, resultAttempt: attempt};
 
         // Send the data using post
         $.ajax({
